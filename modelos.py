@@ -12,4 +12,18 @@ class Veiculo:
 veiculo = Veiculo("ABCD123", "Gol")
 print(veiculo)
 
+class Estacionamento:
+    def __init__(self):
+        self.patio = []
+        self.saidas = []
 
+    def registrar_entrada(self, placa: str, modelo: str):
+        for veiculo in self.patio:
+            if veiculo.placa == placa:
+                print("A placa desse veiculo ja foi cadastrada!")
+                return
+
+        novo_veiculo = Veiculo(placa, modelo)
+
+        self.patio.append(novo_veiculo)
+        print(f"Veiculo {placa} registrado as {novo_veiculo.horario_entrada.strftime('%H:%M')}! ")
