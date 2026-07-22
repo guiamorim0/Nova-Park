@@ -27,3 +27,18 @@ class Estacionamento:
 
         self.patio.append(novo_veiculo)
         print(f"Veiculo {placa} registrado as {novo_veiculo.horario_entrada.strftime('%H:%M')}! ")
+
+    def listar_patio(self):
+        if len(self.patio) == 0:
+            print("Nenhum carro cadastrado!")
+            return
+        for veiculo in self.patio:
+            print(veiculo)
+
+    def buscar_veiculo(self, placa: str):
+        veiculo_encontrado = None
+        for veiculo in self.patio:
+            if veiculo.placa == placa:
+                veiculo_encontrado = veiculo
+                break
+        return veiculo_encontrado
