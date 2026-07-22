@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import math
 
 class Veiculo:
     def __init__(self, placa: str, modelo: str):
@@ -42,3 +43,9 @@ class Estacionamento:
                 veiculo_encontrado = veiculo
                 break
         return veiculo_encontrado
+
+    def calcular_valor(self, horas: int):
+        preco_fixo = 15
+        horas_adicionais = horas - 1
+        preco_adicional = horas_adicionais * 8
+        return preco_fixo + preco_adicional
