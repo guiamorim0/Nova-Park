@@ -31,7 +31,7 @@ class Estacionamento:
 
     def listar_patio(self):
         if len(self.patio) == 0:
-            print("Nenhum carro cadastrado!")
+            print("Nenhum veiculo cadastrado!")
             return
         for veiculo in self.patio:
             print(veiculo)
@@ -49,3 +49,37 @@ class Estacionamento:
         horas_adicionais = horas - 1
         preco_adicional = horas_adicionais * 8
         return preco_fixo + preco_adicional
+
+    def registrar_saida(self, placa: str):
+        veiculo = self.buscar_veiculo(placa)
+        if veiculo is None:
+            print("Nenhum veiculo encontrado!")
+            return
+        saida = datetime.now()
+
+        diferenca =  saida - veiculo.horario_entrada
+        segundos = diferenca.total_seconds()
+        horas_cobradas = math.ceil(segundos / 3600)
+
+        if horas_cobradas == 0:
+            horas_cobradas = 1
+
+        valor = self.calcular_valor(horas_cobradas)
+
+        print(f"""
+        ===== TICKET - {veiculo.placa} =====
+        Entrada: {veiculo.horario_entrada.strftime('%H:%M')}
+        Saida: {saida.strftime('%H:%M')}
+        Permanencia: {horas_cobradas} hora(s) cobrada(s)
+        Valor: R$ {valor:.2f}
+        """)
+
+        self.saidas.append({
+            "placa": veiculo.placa,
+            "entrada": veiculo.horario_entrada,
+            "saida": saida,
+            "valor": valor
+            })
+
+        self.patio.remove(veiculo)
+
