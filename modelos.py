@@ -83,3 +83,10 @@ class Estacionamento:
 
         self.patio.remove(veiculo)
 
+    def historico_saidas(self):
+        if len(self.saidas) == 0:
+            print("Nenhum veiculo encontrado!")
+            return
+        else:
+            for registro in self.saidas:
+                print(f"{registro['placa']} | Saida: {registro['saida'].strftime('%H:%M')} | R$ {registro['valor']:.2f}")
