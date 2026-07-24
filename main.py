@@ -1,6 +1,7 @@
 from modelos import Estacionamento
 
 estacionamento = Estacionamento()
+estacionamento.carregar()
 
 while True:
 

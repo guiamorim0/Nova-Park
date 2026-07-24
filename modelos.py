@@ -112,3 +112,17 @@ class Estacionamento:
             for veiculo in self.patio:
                 linha = f"{veiculo.placa};{veiculo.modelo};{veiculo.horario_entrada.strftime('%Y-%m-%d %H:%M:%S')}\n"
                 arquivo.write(linha)
+
+    def carregar(self):
+        try:
+            with open("patio.txt", "r") as arquivo:
+                for linha in arquivo:
+                    dados = linha.strip().split(";")
+                    placa = dados[0]
+                    modelo = dados[1]
+                    horario = datetime.strptime(dados[2], "%Y-%m-%d %H:%M:%S")
+                    veiculo = Veiculo(placa, modelo)
+                    veiculo.horario_entrada = horario
+                    self.patio.append(veiculo)
+        except FileNotFoundError:
+            pass   
