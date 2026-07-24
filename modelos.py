@@ -90,3 +90,19 @@ class Estacionamento:
         else:
             for registro in self.saidas:
                 print(f"{registro['placa']} | Saida: {registro['saida'].strftime('%H:%M')} | R$ {registro['valor']:.2f}")
+
+    def relatorio(self):
+        faturamento = 0
+        for registro in self.saidas:
+            faturamento += registro['valor']
+
+        print("===== RELATORIO =====")
+        print(f"Veiculos no patio: {len(self.patio)}")
+        print(f"Total de saidas: {len(self.saidas)}")
+        print(f"Faturamento do dia: R$ {faturamento:.2f}")
+
+        if len(self.saidas) > 0:
+            ticket_medio = faturamento / len(self.saidas)
+            print(f"Ticket medio: R$ {ticket_medio:.2f}")
+        else:
+            print("Ticket medio: Nenhuma saida registrada")
