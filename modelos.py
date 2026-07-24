@@ -106,3 +106,9 @@ class Estacionamento:
             print(f"Ticket medio: R$ {ticket_medio:.2f}")
         else:
             print("Ticket medio: Nenhuma saida registrada")
+
+    def salvar(self):
+        with open("patio.txt", "w") as arquivo:
+            for veiculo in self.patio:
+                linha = f"{veiculo.placa};{veiculo.modelo};{veiculo.horario_entrada.strftime('%Y-%m-%d %H:%M:%S')}\n"
+                arquivo.write(linha)

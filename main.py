@@ -42,6 +42,7 @@ while True:
         estacionamento.relatorio()
 
     elif opcao == "0":
+        estacionamento.salvar()
         print("Saindo...")
         break
 
